@@ -18,10 +18,23 @@ const renderBtnText = (x, y, w, h, txt) => {
   ctx.fillText(txt, tx, ty);
 }
 
+const renderBtnImg = (x, y, w, h, img) => {
+  roundRectangle({ x, y, width: w, height: h, r: 0.1 })
+
+  const btnImg = new Image()
+
+  btnImg.onload = () => {
+    const ix = x + (w * 0.1)
+    const iy = y + (h * 0.1)
+    ctx.drawImage(btnImg, ix, iy, w * 0.8, h * 0.8)
+  }
+  btnImg.src = img
+}
+
 // TODO:
 
 export default () => {
   const ctx = window.ctx
 }
 
-export { renderBtnText }
+export { renderBtnText, renderBtnImg }

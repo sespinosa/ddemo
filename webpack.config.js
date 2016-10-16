@@ -23,7 +23,9 @@ module.exports = {
             {
                 loader: 'babel-loader',
                 test: dir_js,
-            }
+            },
+            { test: /\.png$/, loader: "url-loader?mimetype=image/png" },
+            { test: /\.jpg$/, loader: "url-loader?mimetype=image/jpg" }
         ]
     },
     plugins: [
