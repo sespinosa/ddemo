@@ -3,32 +3,33 @@ import { roundRectangle } from '../../utils/shapes'
 const ctx = window.ctx
 
 
-const renderBtnText = (x, y, w, h, txt) => {
-  roundRectangle({ x, y, w, h, r: 0.1 })
+const renderBtnText = ({ x, y, w, h, lw = 1, lc = '#000000', txt }) => {
+
+  roundRectangle({ x, y, w, h, r: 0.1, lw, lc })
+
   const font = 'serif'
   const fontSize = h/4
-  ctx.font = `${fontSize}px ${font}`;
+
+  ctx.font = `${fontSize}px ${font}`
 
   const tw = ctx.measureText(txt).width
 
   const tx = ((w - tw)/2) + x
   const ty = (y + h) - ((h - fontSize)/2)
 
-  ctx.fillText(txt, tx, ty);
+  ctx.fillStyle = lc
   ctx.fillText(txt, tx, ty);
 }
 
-const renderBtnImg = (x, y, w, h, img) => {
-  roundRectangle({ x, y, width: w, height: h, r: 0.1 })
+const renderBtnImg = ({ x, y, w, h, lw = 1, lc = '#000000', sprite }) => {
+  roundRectangle({ x, y, w, h, r: 0.1, lw , lc })
 
   const btnImg = new Image()
+  btnImg.src = sprite
 
-  btnImg.onload = () => {
-    const ix = x + (w * 0.1)
-    const iy = y + (h * 0.1)
-    ctx.drawImage(btnImg, ix, iy, w * 0.8, h * 0.8)
-  }
-  btnImg.src = img
+  const ix = x + (w * 0.1)
+  const iy = y + (h * 0.1)
+  ctx.drawImage(btnImg, ix, iy, w * 0.8, h * 0.8)
 }
 
 // TODO:

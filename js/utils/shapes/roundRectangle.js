@@ -1,4 +1,4 @@
-export default ({ x, y, w, h, r = 0.1, lw = 1 }) => {
+export default ({ x, y, w, h, r = 0.1, lw = 1, bc = '#FFFFFF', lc = '#000000' }) => {
   const ctx = window.ctx
   const offset = Math.min(w, h) * r
 
@@ -8,6 +8,8 @@ export default ({ x, y, w, h, r = 0.1, lw = 1 }) => {
   const d = [x, y + h]
 
   ctx.lineWidth = lw
+  ctx.fillStyle = bc
+  ctx.strokeStyle = lc
 
   ctx.beginPath()
 
@@ -22,5 +24,6 @@ export default ({ x, y, w, h, r = 0.1, lw = 1 }) => {
   ctx.quadraticCurveTo(...a, x + offset, y)
 
   ctx.stroke()
+  ctx.fill()
 
 }

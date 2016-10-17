@@ -1,5 +1,15 @@
 import 'babel-polyfill';
-import sick from './canvas'
+import canvas from './canvas'
+import { appState, render, stopRender } from './renderer'
+import { watchEvents } from './events'
 import menu from './menu'
 
-menu()
+watchEvents()
+render()
+
+// stopRender()
+
+// setTimeout(() => {
+//   stopRender()
+//   console.log('Render Stoped')
+// }, 1000)
