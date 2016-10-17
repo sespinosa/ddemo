@@ -23,9 +23,9 @@ const appState = {
   removeById(id) {
     this.queue = this.queue.filter((el) => el.id !== id)
   },
-  getParent(id) {
-     const res = this.getQueue().filter((el) => el.parent === id)
-     return res.length > 0 ? res : null
+  getParent(el) {
+     const res = this.getQueue().filter((e) => el.parent == e.id)
+     return res.length > 0 ? res[0] : {}
   },
   setMousePos({ x, y }) {
     this.mx = x

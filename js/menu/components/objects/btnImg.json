@@ -1,4 +1,4 @@
 export default [
-  [45, 580, 50, 50, "handDrag"],
-  [105, 580, 50, 50, "oneUp"]
+  [15, 550, 50, 50, "handDrag"],
+  [75, 550, 50, 50, "oneUp"]
 ]

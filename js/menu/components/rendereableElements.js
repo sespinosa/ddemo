@@ -3,6 +3,7 @@ import logo from './objects/logo.json'
 import btnImgs from './objects/btnImg.json'
 import btnTxts from './objects/btnTxt.json'
 import { events } from '../../events'
+import { posByParent } from '../../utils'
 
 const appState = window.appState
 
@@ -32,7 +33,7 @@ appState.addElement(
 /* Buttons are the layer childs */
 
 btnImgs.forEach((o) => {
-  appState.addElement({
+  let el = appState.addElement({
         type: 'button_image',
         origin: ORIGIN,
         parent: layerId,
@@ -45,12 +46,13 @@ btnImgs.forEach((o) => {
           sprite: o[4]
         }
       })
+  posByParent(el)
 })
 
 /* Text Buttons */
 
 btnTxts.forEach((o) => {
-  appState.addElement({
+  let el = appState.addElement({
     type: 'button_text',
     origin: ORIGIN,
     parent: layerId,
@@ -63,6 +65,7 @@ btnTxts.forEach((o) => {
       txt: o[4]
     }
   })
+  posByParent(el)
 })
 
 
