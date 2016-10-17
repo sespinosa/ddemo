@@ -4,7 +4,7 @@ const ctx = window.ctx
 
 
 const renderBtnText = (x, y, w, h, txt) => {
-  roundRectangle({ x, y, width: w, height: h, r: 0.1 })
+  roundRectangle({ x, y, w, h, r: 0.1 })
   const font = 'serif'
   const fontSize = h/4
   ctx.font = `${fontSize}px ${font}`;

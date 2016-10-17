@@ -1,8 +1,8 @@
 export default {
   "x": 30,
   "y": 30,
-  "width": 200,
-  "height": 700,
+  "w": 200,
+  "h": 700,
   "r": 0.1,
-  "lineWidth": 5
+  "lw": 5
 }

@@ -1,31 +1,26 @@
-export default ({ x, y, width, height, r = 0.1, lineWidth = 1 } ) => {
-
+export default ({ x, y, w, h, r = 0.1, lw = 1 }) => {
   const ctx = window.ctx
-  const delta = r
-  const w = width - ((width*delta)*2)
-  const h = height - ((height*delta)*2)
+  const offset = Math.min(w, h) * r
 
-  const start = [x+(width*delta), y]
-  const second = [start[0]+w, y]
-  const third = [x+width, y+(height*delta)]
-  const fourth = [x+width, y+(height*delta)+h]
-  const fifth = [start[0]+w, y+height]
-  const sixth = [x+(width*delta), y+height]
-  const seventh = [x, y+(height*delta)+h]
-  const eigth = [x, y+(height*delta)]
+  const a = [x, y]
+  const b = [x + w, y]
+  const c = [x + w, y + h]
+  const d = [x, y + h]
 
-  ctx.lineWidth = lineWidth
+  ctx.lineWidth = lw
 
   ctx.beginPath()
-  ctx.moveTo(...start)
-  ctx.lineTo(...second)
-  ctx.quadraticCurveTo(x+width, y, ...third)
-  ctx.lineTo(...fourth)
-  ctx.quadraticCurveTo(x+width, y+height, ...fifth)
-  ctx.lineTo(...sixth)
-  ctx.quadraticCurveTo(x, y+height, ...seventh)
-  ctx.lineTo(...eigth)
-  ctx.quadraticCurveTo(x, y, ...start)
+
+  ctx.moveTo(x + offset, y)
+  ctx.lineTo(x + w - offset, y)
+  ctx.quadraticCurveTo(...b, x + w, y + offset)
+  ctx.lineTo(x + w, y + h - offset)
+  ctx.quadraticCurveTo(...c, x + w - offset, y + h)
+  ctx.lineTo(x + offset, y + h)
+  ctx.quadraticCurveTo(...d, x, y + h - offset)
+  ctx.lineTo(x, y + offset)
+  ctx.quadraticCurveTo(...a, x + offset, y)
+
   ctx.stroke()
 
 }
