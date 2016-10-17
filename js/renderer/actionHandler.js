@@ -13,18 +13,16 @@ const flagOnmouseOver = () => {
       return false
     })
   )
-  if(mOId) {
-     window.appState.queue.forEach((el) => {
-      if(el.events) {
-        if(el.id === mOId) {
-          el.events.mouseOver = true
-        }
-        else {
-          el.events.mouseOver = false
-        }
+   window.appState.queue.forEach((el) => {
+    if(el.events) {
+      if(el.id === mOId) {
+        el.events.mouseOver = true
       }
-    })
-  }
+      else {
+        el.events.mouseOver = false
+      }
+    }
+  })
 }
 
 const getIfInside = ({x, y, w, h}) => {
