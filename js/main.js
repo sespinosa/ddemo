@@ -4,6 +4,7 @@ import { appState, render, stopRender } from './renderer'
 import { watchEvents } from './events'
 import menu from './menu'
 
+
 watchEvents()
 render()
 

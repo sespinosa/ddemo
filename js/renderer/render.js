@@ -1,4 +1,5 @@
 import { createObjects, updateActions } from './objectHandler'
+import { grid } from '../utils/shapes'
 
 /** requestAnimationFrame polyfill **/
 if ( !window.requestAnimationFrame ) {
@@ -17,6 +18,7 @@ const canvas = window.canvas
 
 const render = () => {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	grid()
 	updateActions()
 	createObjects()
   window.animationId = requestAnimationFrame(render)
