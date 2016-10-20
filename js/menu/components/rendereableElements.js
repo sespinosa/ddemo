@@ -11,7 +11,7 @@ const ORIGIN = 'god'
 
 /** Layer! **/
 const layerId = appState.addElement(Object.assign(
-  {}, { type: 'layer', origin: ORIGIN, parent: null }, { props: layer }
+  {}, { type: 'layer', origin: ORIGIN, parent: null, events: events() }, { props: layer }
 )).id
 
 /* Logo x, y is calculated from left to right with the offset */
@@ -35,15 +35,16 @@ appState.addElement(
 btnImgs.forEach((o) => {
   let el = appState.addElement({
         type: 'button_image',
+        toolName: o[0],
         origin: ORIGIN,
         parent: layerId,
         events: events(),
         props: {
-          x: o[0],
-          y: o[1],
-          w: o[2],
-          h: o[3],
-          sprite: o[4]
+          x: o[1],
+          y: o[2],
+          w: o[3],
+          h: o[4],
+          sprite: o[5]
         }
       })
   posByParent(el)
@@ -54,15 +55,16 @@ btnImgs.forEach((o) => {
 btnTxts.forEach((o) => {
   let el = appState.addElement({
     type: 'button_text',
+    toolName: o[0],
     origin: ORIGIN,
     parent: layerId,
     events: events(),
     props: {
-      x: o[0],
-      y: o[1],
-      w: o[2],
-      h: o[3],
-      txt: o[4]
+      x: o[1],
+      y: o[2],
+      w: o[3],
+      h: o[4],
+      txt: o[5]
     }
   })
   posByParent(el)

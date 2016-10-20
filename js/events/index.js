@@ -1,6 +1,7 @@
 import { watchMouseEvents } from './mouse'
 
 const SchemaEvents = {
+  selected: false,
   mouseOver: false,
   mousePress: false
 }

@@ -31,8 +31,6 @@ const getIfInside = ({x, y, w, h}) => {
     return true
   }
   return false
-
-
 }
 
 const getLastChildId = (elms) => {

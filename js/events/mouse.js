@@ -1,15 +1,23 @@
+import { mapToTools } from './mapToTools'
+
 const canvas = window.canvas
+const appState = window.appState
+
 
 const evts = {
   mousemove : 'mousemove',
   click : 'click',
-  mwheel: 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll'
+  mwheel: 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll',
+  mouseDown: 'mousedown',
+  mouseUp: 'mouseup'
 }
 
 const watchMouseEvents = () => {
   addEventListener(evts.mousemove, onMouseMove, false)
   addEventListener(evts.mwheel, onMouseWheel, false)
-  //addEventListener(evts.click, onMouseClick, false)
+  addEventListener(evts.click, onMouseClick, false)
+  addEventListener(evts.mouseDown, onMouseDown, false)
+  addEventListener(evts.mouseUp, onMouseUp, false)
 }
 
 const onMouseWheel = (e) => {
@@ -44,18 +52,24 @@ const onMouseMove = (e) => {
 }
 
 const onMouseClick = (e) => {
+  if(appState.mClickHandler) {
+    appState.mClickHandler(e)
+  } else {
+    mapToTools()
+  }
+}
 
-  const ctx = window.ctx
+const onMouseDown = (e) => {
+  // console.log('Mouse Down')
+  // const button = e.button || e.wich
+  // if(button === 2) e.preventDefault()
 
-  ctx.beginPath();
-  ctx.arc(window.appState.getMousePos().x, window.appState.getMousePos().y, 10, 0, 2 * Math.PI, false);
-  ctx.fillStyle = 'green';
-  ctx.fill();
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = '#003300';
-  ctx.stroke();
+}
 
-  cancelAnimationFrame(window.animationId)
+const onMouseUp = (e) => {
+  // console.log('Mouse Up')
+  // const button = e.button || e.wich
+  // if(button === 2) e.preventDefault()
 }
 
 export { watchMouseEvents }

@@ -3,6 +3,7 @@ import canvas from './canvas'
 import { appState, render, stopRender } from './renderer'
 import { watchEvents } from './events'
 import menu from './menu'
+import tools from './tools'
 
 
 watchEvents()
