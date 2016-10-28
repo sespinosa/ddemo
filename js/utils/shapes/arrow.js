@@ -85,7 +85,7 @@ const arrowPoint = ({ x1, y1, x2, y2, bc = '#000000', lc = '#000000', lw = 1 }) 
   ctx.lineTo(x1, y1)
   ctx.stroke()
 
-  triangleArc({x1: x1, y1: y1, x2: hx2, y2: hy2, x3: hx3, y3: hy3, bc: '#000000'})
+  triangleArc({x1: x1, y1: y1, x2: hx2, y2: hy2, x3: hx3, y3: hy3, bc, lc})
 }
 
 export { arrowArc, arrowPoint, arrow }

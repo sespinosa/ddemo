@@ -2,12 +2,18 @@ import { events } from '../events'
 
 class toolBase {
 
-  constructor(toolName) {
+  constructor(toolName, points) {
     this._toolName = toolName
+    this.points = points
+    this._transitionName = `${toolName}_transition`
   }
 
   getToolName() {
     return this._toolName
+  }
+
+  getTransitionName() {
+    return this._transitionName
   }
 
   setStatus(status) {
@@ -29,10 +35,12 @@ class toolBase {
   set() {
     window.appState.setTool(this)
     this.setEventHandlers()
+    if(this.initialTransition) this.addToTransitions()
   }
 
   close() {
     this.reset()
+    window.appState.resetTransitions()
     window.appState.resetHandlers()
     window.appState.resetTool()
   }
@@ -43,7 +51,17 @@ class toolBase {
       origin: 'USER',
       parent: null,
       events: events(),
-      props: this.getProps()
+      props: this.getProps(),
+      points: this.points
+    })
+  }
+
+  addToTransitions() {
+    appState.addTransition({
+      type: this.getTransitionName(),
+      origin: 'USER',
+      parent: null,
+      props: this.getTransitionProps()
     })
   }
 

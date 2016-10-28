@@ -1,10 +1,11 @@
-import { arrowTool } from '../tools'
+import { arrowTool, rectangleTool } from '../tools'
 
 const appState = window.appState
 
 const Tools = []
 
 Tools.push(new arrowTool())
+Tools.push(new rectangleTool())
 
 const mapToTools = () => {
   appState.getQueue().forEach((o) => {

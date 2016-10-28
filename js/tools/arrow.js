@@ -5,7 +5,7 @@ const appState = window.appState
 class arrowTool extends toolBase {
 
   constructor() {
-    super('Arrow')
+    super('Arrow', 2)
     this._firstCord = null
     this._secondCord = null
   }
@@ -27,23 +27,31 @@ class arrowTool extends toolBase {
   }
 
   mClickHandler(e) {
-    if(!appState.tool.getFirstCord()) {
-      appState.tool.setFirstCord(appState.getMousePos())
-    }
-    else {
-      appState.tool.setSecondCord(appState.getMousePos())
-      appState.tool.addToState()
-      appState.tool.close()
-    }
+    // if(!appState.tool.getFirstCord()) {
+    //   appState.tool.setFirstCord(appState.getMousePos())
+    //   appState.tool.addToTransitions()
+    // }
+    // else {
+    //   appState.tool.setSecondCord(appState.getMousePos())
+    //   appState.tool.addToState()
+    //   appState.tool.close()
+    // }
 
   }
 
   mDownHandler(e) {
-    return
+    if(!appState.tool.getFirstCord()) {
+      appState.tool.setFirstCord(appState.getMousePos())
+      appState.tool.addToTransitions()
+    }
   }
 
   mUpHandler(e) {
-    return
+    if(appState.tool.getFirstCord() &&  !appState.tool.comCords(appState.tool.getFirstCord())) {
+      appState.tool.setSecondCord(appState.getMousePos())
+      appState.tool.addToState()
+      appState.tool.close()
+    }
   }
 
   getProps() {
@@ -55,13 +63,25 @@ class arrowTool extends toolBase {
     }
   }
 
+  getTransitionProps() {
+    return {
+      x: this.getFirstCord().x,
+      y: this.getFirstCord().y
+    }
+  }
+
   reset() {
     this.setFirstCord(null)
     this.setSecondCord(null)
+  }
 
+  comCords(c) {
+    return appState.tool.dist(c, appState.getMousePos()) < 50
+  }
+
+  dist(a, b) {
+    return Math.hypot(a.x - b.x, a.y - b.y)
   }
 }
-
-window.arrow = arrowTool
 
 export { arrowTool }

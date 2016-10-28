@@ -51,6 +51,39 @@ const create_arrow = (props) => {
   arrowPoint({ x1: p.x2, y1: p.y2, x2: p.x1, y2: p.y1, bc: p.bc, lc: p.lc })
 }
 
+const create_arrow_transition = (props) => {
+  const p = Object.assign({}, props.props)
+  const mc = window.appState.getMousePos()
+  p.bc = 'hsla(0, 0%, 0%, 0.2)'
+  p.lc = 'hsla(0, 0%, 0%, 0.2)'
+  arrowPoint({ x1: mc.x, y1: mc.y, x2: p.x, y2: p.y, bc: p.bc, lc: p.lc })
+}
+
+const create_rectangle = (props) => {
+  const e = Object.assign({}, props.events)
+  const p = Object.assign({}, props.props)
+  if(e.mouseOver) {
+    p.lw = 3
+    p.lc = '#00FFFF'
+  }
+
+  roundRectangle({ x: p.x, y: p.y, w: p.w, h: p.h, bc: p.bc, lc: p.lc, lw: p.lw })
+}
+
+const create_rectangle_transition = (props) => {
+  const p = Object.assign({}, props.props)
+  const mx = window.appState.getMousePos().x
+  const my = window.appState.getMousePos().y
+
+  const rx = mx - (p.w/2)
+  const ry = my - (p.h/2)
+
+  // p.bc = 'hsla(0, 0%, 0%, 0.2)'
+  p.lc = 'hsla(0, 0%, 0%, 0.2)'
+
+  roundRectangle({ x: rx, y: ry, w: p.w, h: p.h, bc: p.bc, lc: p.lc, lw: 2 })
+}
+
 const createObjects = () => {
 
   const queue = window.appState.getQueue()
@@ -70,15 +103,38 @@ const createObjects = () => {
       case 'Arrow':
         create_arrow(el)
         break
+      case 'Rectangle':
+        create_rectangle(el)
+        break
       case 'logo_bottom':
         break
       default:
-        console.log('Theres no renderer for:')
+        console.log('Theres no renderer for element:')
         console.log(el)
         return
     }
   })
+  createTransitions()
 }
 
+const createTransitions = () => {
+  const transitions = window.appState.getTransitions()
+
+  transitions.forEach((t) => {
+    switch (t.type) {
+      case 'Arrow_transition':
+        create_arrow_transition(t)
+        break
+      case 'Rectangle_transition':
+        create_rectangle_transition(t)
+        break
+      default:
+        console.log('Theres no renderer for transition:')
+        console.log(t)
+        return
+    }
+  })
+
+}
 
 export { createObjects, updateActions }

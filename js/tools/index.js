@@ -1,4 +1,5 @@
 import { arrowTool } from './arrow'
+import { rectangleTool } from './rectangle'
 
 
-export { arrowTool }
+export { arrowTool, rectangleTool }

@@ -1,4 +1,4 @@
-### Follow the fucking steps:
+### Follow the steps:
 
 ```
 npm install

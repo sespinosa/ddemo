@@ -60,16 +60,16 @@ const onMouseClick = (e) => {
 }
 
 const onMouseDown = (e) => {
-  // console.log('Mouse Down')
-  // const button = e.button || e.wich
-  // if(button === 2) e.preventDefault()
+  if(appState.mDownHandler) {
+    appState.mDownHandler(e)
+  }
 
 }
 
 const onMouseUp = (e) => {
-  // console.log('Mouse Up')
-  // const button = e.button || e.wich
-  // if(button === 2) e.preventDefault()
+  if(appState.mUpHandler) {
+    appState.mUpHandler(e)
+  }
 }
 
 export { watchMouseEvents }
